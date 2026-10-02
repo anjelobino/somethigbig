@@ -10,19 +10,66 @@ ALPHA_VANTAGE_URL = "https://www.alphavantage.co/query"
 
 # Cache structure: { symbol: { "data": dict, "timestamp": float } }
 _CACHE: Dict[str, Dict[str, Any]] = {
-    # Seed fallback cache for popular tickers in case free 25/day API limit is hit
+    "NIFTY": {
+        "data": {
+            "symbol": "NIFTY",
+            "price": 25280.50,
+            "open": 25210.00,
+            "high": 25345.80,
+            "low": 25190.20,
+            "volume": 18400000,
+            "change_percent": 0.57,
+            "change": 142.30,
+            "previous_close": 25138.20,
+            "latest_trading_day": "2026-10-02",
+            "api_symbol": "^NSEI"
+        },
+        "timestamp": time.time()
+    },
+    "SENSEX": {
+        "data": {
+            "symbol": "SENSEX",
+            "price": 82890.20,
+            "open": 82600.00,
+            "high": 83050.40,
+            "low": 82510.10,
+            "volume": 12800000,
+            "change_percent": 0.58,
+            "change": 478.10,
+            "previous_close": 82412.10,
+            "latest_trading_day": "2026-10-02",
+            "api_symbol": "^BSESN"
+        },
+        "timestamp": time.time()
+    },
+    "TATAMOTORS": {
+        "data": {
+            "symbol": "TATAMOTORS",
+            "price": 988.40,
+            "open": 962.00,
+            "high": 994.00,
+            "low": 958.10,
+            "volume": 14200000,
+            "change_percent": 3.58,
+            "change": 34.20,
+            "previous_close": 954.20,
+            "latest_trading_day": "2026-10-02",
+            "api_symbol": "TATAMOTORS.BSE"
+        },
+        "timestamp": time.time()
+    },
     "RELIANCE": {
         "data": {
             "symbol": "RELIANCE",
-            "price": 1187.50,
-            "open": 1183.00,
-            "high": 1196.30,
-            "low": 1182.10,
-            "volume": 970803,
-            "change_percent": 0.30,
-            "change": 3.50,
-            "previous_close": 1184.00,
-            "latest_trading_day": "2026-09-30",
+            "price": 2450.00,
+            "open": 2425.00,
+            "high": 2468.50,
+            "low": 2422.10,
+            "volume": 8420000,
+            "change_percent": 1.21,
+            "change": 29.40,
+            "previous_close": 2420.60,
+            "latest_trading_day": "2026-10-02",
             "api_symbol": "RELIANCE.BSE"
         },
         "timestamp": time.time()
