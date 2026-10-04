@@ -61,7 +61,7 @@ export default function StockSearchBar({
     }
   };
 
-  const popularSymbols = ["RELIANCE", "NVDA", "TCS", "TSLA", "AAPL", "INFY"];
+  const popularSymbols = ["NIFTY", "SENSEX", "RELIANCE", "TATAMOTORS", "HDFCBANK", "TCS", "INFY"];
 
   const content = (
     <div className="w-full bg-[#121824] rounded-2xl border border-slate-700/70 shadow-2xl overflow-hidden">

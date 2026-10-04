@@ -13,7 +13,7 @@ import {
 } from 'lucide-react';
 
 export default function PriceChartPlaceholder({ stock }) {
-  const [timeframe, setTimeframe] = useState('15m');
+  const [timeframe, setTimeframe] = useState('1D');
   const [chartType, setChartType] = useState('candlestick'); // 'candlestick' | 'area'
   const [showPredictionZone, setShowPredictionZone] = useState(true);
   const [hoveredCandle, setHoveredCandle] = useState(null);
@@ -24,7 +24,7 @@ export default function PriceChartPlaceholder({ stock }) {
       return [];
     }
     return stock.chartHistory;
-  }, [stock]);
+  }, [stock, stock?.price]);
 
   if (!stock || history.length === 0) {
     return (
@@ -112,7 +112,7 @@ export default function PriceChartPlaceholder({ stock }) {
         <div className="flex items-center gap-2">
           {/* Timeframe pill selector */}
           <div className="flex items-center bg-[#0d121c] p-0.5 rounded-lg border border-slate-800 text-xs font-mono">
-            {['1m', '5m', '15m', '1H', '1D', '1W'].map((tf) => (
+            {['1D', '1W', '1M', '1Y', 'ALL'].map((tf) => (
               <button
                 key={tf}
                 onClick={() => setTimeframe(tf)}
@@ -361,6 +361,59 @@ export default function PriceChartPlaceholder({ stock }) {
               </g>
             );
           })}
+
+          {/* Real-time Current Live Price Line & Tag */}
+          {(() => {
+            const liveY = getY(stock.price);
+            const lastX = paddingLeft + (history.length - 1) * candleSpacing + candleSpacing / 2;
+            return (
+              <g>
+                <line
+                  x1={paddingLeft}
+                  y1={liveY}
+                  x2={svgWidth - paddingRight}
+                  y2={liveY}
+                  stroke="#00D09C"
+                  strokeWidth="1.2"
+                  strokeDasharray="4 3"
+                  opacity="0.85"
+                />
+                <circle
+                  cx={lastX}
+                  cy={liveY}
+                  r="5"
+                  fill="#00D09C"
+                  className="animate-ping"
+                  opacity="0.7"
+                />
+                <circle
+                  cx={lastX}
+                  cy={liveY}
+                  r="3.5"
+                  fill="#00D09C"
+                />
+                <rect
+                  x={svgWidth - paddingRight + 4}
+                  y={liveY - 9}
+                  width="62"
+                  height="18"
+                  rx="4"
+                  fill="#00D09C"
+                />
+                <text
+                  x={svgWidth - paddingRight + 35}
+                  y={liveY + 3.5}
+                  fill="#0b0e14"
+                  fontSize="9.5"
+                  fontFamily="JetBrains Mono"
+                  fontWeight="bold"
+                  textAnchor="middle"
+                >
+                  {stock.currency}{Number(stock.price).toFixed(1)}
+                </text>
+              </g>
+            );
+          })()}
 
           {/* Time axis labels */}
           {history.map((c, i) => {
